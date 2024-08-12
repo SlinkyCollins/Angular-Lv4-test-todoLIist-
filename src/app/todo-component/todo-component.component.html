@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lv4 Test</title>
+    <link rel="stylesheet" href="todo-component.component.css">
+</head>
+<body>
+    <h1>Create Todo</h1>
+    <div class="container">
+        <input type="text" name="Title" placeholder="Todo Title" required>
+        <textarea name="Todo Details" id="" placeholder="Todo Details" [(ngModel)]="todoDetails" required></textarea>
+
+        <button (click)="createTodo()">Create Todo</button>
+    </div>
+
+    <div>
+        <h1>Your Todo List</h1>
+        <div *ngFor="let todo of todoArray, let i = index">
+            <p>{{i+1}}</p>
+            <h3>{{todo.title}}</h3>
+            <p>{{todo.details}}</p>
+
+            <div>
+                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editModal" (click)="openEditModal(i)">Edit Todo</button>
+                <button class="btn btn-danger" (click)="deleteTodo(i)">Delete Todo</button>
+            </div>
+        </div>
+
+
+        <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h1 class="modal-title fs-5" id="exampleModalLabel">Edit Todo</h1>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <input type="text" class="form-control my-2" [(ngModel)]="editTitle" placeholder="Todo Title">
+                    <input type="text" class="form-control my-2" [(ngModel)]="editTodoDetails" placeholder="Todo Details">
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                  <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="saveEditTodo()">Save changes</button>
+                </div>
+              </div>
+            </div>
+          </div>
+    </div>
+
+</body>
+</html>
